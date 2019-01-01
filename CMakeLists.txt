@@ -44,12 +44,16 @@ add_library (RTIMULib SHARED IMPORTED)
 set_target_properties( RTIMULib PROPERTIES IMPORTED_LOCATION /usr/local/lib/libRTIMULib.so)
 
 find_library(RT_LIB RTIMULib)
+add_executable(rtimu_node src/rtimu_node.cpp)
 add_executable(rtimu_reader src/rtimu_reader.cpp)
 
 
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(rtimu_reader RTIMULib
+   ${catkin_LIBRARIES}
+ )
+target_link_libraries(rtimu_node RTIMULib
    ${catkin_LIBRARIES}
  )
 
